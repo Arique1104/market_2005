@@ -28,19 +28,24 @@ class Market
   end
 
   def total_inventory
-    inventory_all = Hash.new{|hash, key| hash[key] = 0}
+    inventory_all = Hash.new
     @vendors.each do |vendor|
       vendor.inventory.each do |item, amount|
-        inventory_all[item] += amount
+        inventory_all[item] = {}
+        inventory_all[item] = :quanitity
+        inventory_all[item][:quantity] += amount
+        inventory_all[item][:vendors] = []
+        require "pry"; binding.pry
+        inventory_all
+
       end
     end
-    final_hash = Hash.new{|hash, key| hash[key]= []}
-    inventory_all.each do |item, amount|
-      final_hash[item] = amount
+    # final_hash = Hash.new{|hash, key| hash[key]= []}
+    # inventory_all.each do |item, amount|
+    #   final_hash[item] = amount
 
 
-    require "pry"; binding.pry
-    end
+    # end
 
   end
 
